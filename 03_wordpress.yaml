@@ -31,13 +31,30 @@ spec:
                   key: wordpress-db-password
             - name: WORDPRESS_DB_NAME
               value: wordpress
-          # volumeMounts:
-          #  - name: wordpress-data
-          #    mountPath: /var/www/html
-      # volumes:
-       # - name: wordpress-data
-        #  persistentVolumeClaim:
-         #   claimName: wordpress-pvc
+               # --- for session static (for all  pods it will be same) ---
+            - name: WORDPRESS_AUTH_KEY
+              value: "sabit-deger-1-degistir"
+            - name: WORDPRESS_SECURE_AUTH_KEY
+              value: "sabit-deger-2-degistir"
+            - name: WORDPRESS_LOGGED_IN_KEY
+              value: "sabit-deger-3-degistir"
+            - name: WORDPRESS_NONCE_KEY
+              value: "sabit-deger-4-degistir"
+            - name: WORDPRESS_AUTH_SALT
+              value: "sabit-deger-5-degistir"
+            - name: WORDPRESS_SECURE_AUTH_SALT
+              value: "sabit-deger-6-degistir"
+            - name: WORDPRESS_LOGGED_IN_SALT
+              value: "sabit-deger-7-degistir"
+            - name: WORDPRESS_NONCE_SALT
+              value: "sabit-deger-8-degistir"
+          volumeMounts:
+            - name: wordpress-data
+              mountPath: /var/www/html         # tüm WP dosyaları paylaşımlı diskte
+      volumes:
+       - name: wordpress-data
+         persistentVolumeClaim:
+            claimName: wordpress-rwx-pvc
 ---
 apiVersion: v1
 kind: Service

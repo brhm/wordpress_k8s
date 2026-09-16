@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: wordpress-rwx-pvc
+  namespace: wordpress
+spec:
+  accessModes: ["ReadWriteMany"]     # çok pod aynı anda yazabilir
+  storageClassName: nfs              # hostpath değil, nfs sınıfından
+  resources:
+    requests:
+      storage: 2Gi
